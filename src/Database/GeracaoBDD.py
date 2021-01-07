@@ -11,7 +11,7 @@ def CriarBanco(conn):
         );""")
     conn.execute("""
         CREATE TABLE IF NOT EXISTS residencia(
-            idResidencia int primary key,
+            idResidencia integer primary key,
             endereco varchar(200),
             tamanhoDoTerreno  float,
             preco float(2) null,
@@ -19,7 +19,7 @@ def CriarBanco(conn):
         );""")
     conn.execute("""
         CREATE TABLE IF NOT EXISTS moradores(
-            idMorador int primary key,
+            idMorador integer primary key,
             nomeMorador varchar(45),
             cpfMorador varchar(45),
             idResidencia int,
@@ -33,7 +33,7 @@ def CriarBanco(conn):
         );""")
     conn.execute("""
         CREATE TABLE IF NOT EXISTS registroVisitas(
-            idVisita int primary key,
+            idVisita integer primary key,
             placaCarro varchar(7),
             horarioEntrada datetime,
             horarioSaida datetime,
@@ -43,14 +43,14 @@ def CriarBanco(conn):
         """)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS AreaDeLazer(
-            idArea int primary key,
+            idArea integer primary key,
             descricao varchar(45)
         );
     """)
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS registroLazer(
-            idRegistro int primary key,
+            idRegistro integer primary key,
             horarioEntrada datetime,
             horarioSaida datetime,
             idArea int,
