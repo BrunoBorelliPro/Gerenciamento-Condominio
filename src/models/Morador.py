@@ -15,47 +15,43 @@ class Morador:
         conn.commit()
 
     @staticmethod
-    def selectMorador():
+    def selectMoradores():
         listaDePessoas = conn.execute("""SELECT * FROM moradores""")
         return listaDePessoas.fetchall()
 
-    def updateMorador(self, idMorador, nome="", cpf="", idResidencia = ""):
+    def updateMorador(self, cpf, nome="", idResidencia = ""):
         cursor = conn.cursor()
-        morador = []
-        sql = "UPDATE moradores SET "
+        morador = [cpf]
+        sql = "UPDATE moradores SET cpfMorador = ?,"
         if nome != "":
             sql = sql + "nomeMorador = ?,"
             morador.append(nome)
-        if cpf != "":
-            sql = sql + "cpfMorador = ?,"
-            morador.append(cpf)
         if idResidencia != "":
             sql = sql + "idResidencia = ?,"
             morador.append(idResidencia)
 
         sql = sql[:len(sql)-1]
 
-        sql = sql + " WHERE idMorador = ?"
-
-        morador.append(idMorador)
+        sql = sql + " WHERE cpfMorador = ?"
+        morador.append(cpf)
         cursor = conn.cursor()
         cursor.execute(sql, morador)
         conn.commit()
     
     @staticmethod
-    def deleteMorador(idMorador):
+    def deleteMorador(cpf):
         cursor = conn.cursor()
-        cursor.execute("""DELETE Moradores WHERE idMorador = ?""", idMorador)
+        cursor.execute("DELETE FROM Moradores WHERE cpfMorador = ?",[cpf])
         conn.commit()
 
     @staticmethod
-    def selectPMoradorByCpf(cpf):
-        Morador = conn.execute("""SELECT * FROM Morador WHERE cpf = ?""",cpf)
+    def selectMoradorByCpf(cpf):
+        Morador = conn.execute("""SELECT * FROM Moradores WHERE cpfMorador = ?""",[cpf])
         return Morador.fetchall()
-morador = Morador("gustavoTerraPreta","12345678901",2)
-#morador.insertMorador()
 
-nome = input()
-cpf = input()
-idResidencia = input()
-morador.updateMorador(idMorador=5, nome=nome, cpf=cpf, idResidencia=idResidencia)
+
+# morador = Morador("gustavoTerraPreta","12345678901",2)
+# morador.insertMorador()
+#Morador.deleteMorador("1")
+# morador.updateMorador(idMorador=5, nome=nome, cpf=cpf, idResidencia=idResidencia)
+#print(Morador.selectPMoradorByCpf("12345678901"))e

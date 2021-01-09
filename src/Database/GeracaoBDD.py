@@ -19,9 +19,8 @@ def CriarBanco(conn):
         );""")
     conn.execute("""
         CREATE TABLE IF NOT EXISTS moradores(
-            idMorador integer primary key,
+            cpfMorador varchar(45) primary key,
             nomeMorador varchar(45),
-            cpfMorador varchar(45),
             idResidencia int,
             
             CONSTRAINT fk_residencia FOREIGN KEY (idResidencia) REFERENCES Residencia (idResidencia)
@@ -35,8 +34,8 @@ def CriarBanco(conn):
         CREATE TABLE IF NOT EXISTS registroVisitas(
             idVisita integer primary key,
             placaCarro varchar(7),
-            horarioEntrada datetime,
-            horarioSaida datetime,
+            horarioEntrada time,
+            horarioSaida time,
             cpf varchar(11),
             constraint fk_visitante foreign key (cpf) references visitantes (cpf)
         );

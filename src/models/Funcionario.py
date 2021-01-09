@@ -16,28 +16,53 @@ class Funcionario:
         conn.commit()
 
     @staticmethod
-    def selectPFuncionario():
+    def selectFuncionario():
         listaDeFuncionario = conn.execute("""SELECT cpf, nome, cargo, salario, terceirizado FROM Funcionarios""")
         return listaDeFuncionario.fetchall()
     
-    def updateFuncionario(self):
-        funcionario = [self.cpf, self.nome, self.cargo, self.salario, self.terceirizado, self.cpf]
+    @staticmethod
+    def updateFuncionario(cpf, nome="",cargo="",terceirizado="",salario=""):
+
         cursor = conn.cursor()
-        cursor.execute("""UPDATE Funcionarios SET cpf = ?, nome = ?, cargo = ?, salario = ?, terceirizado = ? WHERE cpf = ?""", funcionario)
+        funcionario = [cpf]
+        sql = "UPDATE funcionarios SET cpf = ?,"
+        if nome != "":
+            sql = sql + "nome = ?,"
+            funcionario.append(nome)
+        if cargo != "":
+            sql = sql + "cargo = ?,"
+            funcionario.append(cargo)
+        if terceirizado != "":
+            sql = sql + "terceirizado = ?,"
+            funcionario.append(terceirizado)
+        if salario != "":
+            sql = sql + "salario = ?,"
+            funcionario.append(salario)
+        sql = sql[:len(sql)-1]
+
+        sql = sql + " WHERE cpf = ?"
+
+        funcionario.append(cpf)
+        cursor = conn.cursor()
+        cursor.execute(sql, funcionario)
         conn.commit()
 
     @staticmethod
     def deleteFuncionario(cpf):
         cursor = conn.cursor()
-        cursor.execute("""DELETE Funcionarios WHERE cpf = ?""", cpf)
+        cursor.execute("DELETE FROM Funcionarios WHERE cpf = ?",[cpf])
         conn.commit()
 
     @staticmethod
-    def selectPFuncionarioByCpf(cpf):
-        funcionario = conn.execute("""SELECT cpf, nome, cargo, salario, terceirizado FROM Funcionarios WHERE cpf = ?""",cpf)
+    def selectFuncionarioByCpf(cpf):
+        funcionario = conn.execute("""SELECT cpf, nome, cargo, salario, terceirizado FROM Funcionarios WHERE cpf = ?""",[cpf])
         return funcionario.fetchall()
 
 
-funcionario = Funcionario("12345678901", "bruno", "programador",True)
-funcionario.insertFuncionario()
-#Funcionario.updateFuncionario("12345678901")
+
+
+# funcionario = Funcionario("12345678908", "bruno", "programador",False, 1000)
+# funcionario.insertFuncionario()
+# print(Funcionario.selectPFuncionario())
+# funcionario.updateFuncionario("12345678901","gustavo")
+# Funcionario.deleteFuncionario("12345678902")
