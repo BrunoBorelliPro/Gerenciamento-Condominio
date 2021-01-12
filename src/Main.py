@@ -29,6 +29,11 @@ while True:
             ControllerFuncionario.AlterarFuncionario()
         elif optFuncionario == "5":
             ControllerFuncionario.DeleteFuncionario()
+        elif optFuncionario == "6":
+            print("Saindo")
+            break
+        else:
+            print("Opção invalida")
         
     elif optMenu == "2":
         optResidencia = ControllerResidencia.menuResidencias()
