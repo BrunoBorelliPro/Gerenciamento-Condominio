@@ -68,7 +68,6 @@ class ControllerMoradores:
 
     @staticmethod
     def imprimirListagem(lista):
-        print(lista)
         print("+" + 53 * "-" + "+")
         cabecalho ="|{:15s} {:17s} {:19s}|"
         print(cabecalho.format("CPF", "NOME", "IDRESIDENCIA"))

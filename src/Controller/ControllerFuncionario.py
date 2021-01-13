@@ -47,7 +47,6 @@ class ControllerFuncionario:
     @staticmethod
     def ListarFuncionarios():
         lista = Funcionario.selectFuncionario()
-        print(lista)
         print("+" + 63 * "-" + "+")
         cabecalho = "|{:15s} {:11s} {:13s} {:10s} {:10s}|"
         print(cabecalho.format("CPF","NOME","CARGO", "SALARIO", "TERCEIRIZADO"))

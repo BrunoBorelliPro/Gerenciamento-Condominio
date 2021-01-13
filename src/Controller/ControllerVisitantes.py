@@ -106,7 +106,6 @@ class ControllerVisitantes:
 
     @staticmethod
     def imprimeListagemRegistros(lista):
-        print(lista)
         print("+" + 75 * "-" + "+")
         cabecalho = "|{:15s} {:19s} {:13s} {:11s} {:13s}|"
         print(cabecalho.format("ID REGISTRO", "PLACA DO CARRO","ENTRADA", "SAÍDA", "CPF"))
